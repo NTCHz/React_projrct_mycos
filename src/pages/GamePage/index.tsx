@@ -8,9 +8,6 @@ const GamePage = () => {
       <div className="gamelogic">
         <Gamelogic />
       </div>
-      <div className="game">
-        <Game />
-      </div>
     </div>
   );
 };

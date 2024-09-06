@@ -40,12 +40,13 @@ const Gamelogic = () => {
       data.find((item: string) => item === currentWord) &&
       currentWord.length === randomWordLength
     ) {
-      setScore(Score + randomWordLength);
+      setScore(prevScore => Math.max(prevScore + randomWordLength, 0));
     } else {
-      setHp(hp - 20);
-      setScore(Score - randomWordLength);
+      setHp(prevHp => prevHp - 20);
+      setScore(prevScore => Math.max(prevScore - randomWordLength, 0));
     }
   };
+  
 
   const showSame = () => {
     setHp(hp - 10);
@@ -91,11 +92,12 @@ const Gamelogic = () => {
       setStatus(true);
       Callll();
       setStatussame(false);
-      setWordlist([...wordlist, currentWord]);
+      setWordlist(prevList => [...prevList, currentWord]);
     }
-    setWordArray(new Array(randomWordLength).fill("")); // Clear inputs
-    setRandomWordLength(randomWord()); // Generate new random length
+    setWordArray(new Array(randomWordLength).fill(""));
+    setRandomWordLength(randomWord());
   };
+  
 
   useEffect(() => {
     // Reset wordArray to match the randomWordLength when it changes
@@ -197,12 +199,13 @@ const Gamelogic = () => {
                   color="primary"
                   onClick={() => {
                     setRandomWordLength(randomWord());
-                    setScore(Score - randomWordLength);
+                    setScore(prevScore => Math.max(prevScore - randomWordLength, 0));
                     setWordArray(new Array(randomWordLength).fill(""));
                   }}
                 >
                   NewRandom
                 </Button>
+
                 <Button
                   style={{ marginLeft: "10px" }}
                   variant="contained"
