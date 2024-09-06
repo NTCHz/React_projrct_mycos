@@ -10,7 +10,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import '../BackgroundIndex.css'
 import { TableVirtuoso, TableComponents } from 'react-virtuoso';
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 
@@ -82,6 +82,10 @@ const ScorePage = () => {
     );
   }
 
+  useEffect(() => {
+    ScorePage
+  }, []); 
+  
   return (
     <div className="space-background">
 
