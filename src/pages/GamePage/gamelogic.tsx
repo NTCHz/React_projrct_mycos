@@ -5,8 +5,14 @@ import { useMain } from "../../contexts/MainContext";
 // import { firebase } from "@react-native-firebase/database";
 import { ref, set } from "firebase/database";
 import { database } from "./core/firebase";
-
 import data from "./word.json";
+import './BackgroundIndex.css'
+
+const starPositions = Array.from({ length: 100 }, () => ({
+  top: Math.random() * 100,
+  left: Math.random() * 100,
+  duration: Math.random() * 2 + 1,
+}));
 
 const Gamelogic = () => {
   const [wordArray, setWordArray] = useState<string[]>([]);
@@ -106,113 +112,124 @@ const Gamelogic = () => {
   };
 
   return (
-    <>
-      {hp <= 0 ? (
-        <>
-          <h1>Game Over</h1>
-          <h1>Score : {Score}</h1>
-          {saveScore()}
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              navigate("/");
+    <div className="space-background">
+      <div>
+        {hp <= 0 ? (
+          <>
+            <h1>Game Over</h1>
+            <h1>Score : {Score}</h1>
+            {saveScore()}
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                navigate("/");
+              }}
+            >
+              Back to Home
+            </Button>
+            <Button
+              style={{ marginLeft: "10px" }}
+              variant="contained"
+              color="primary"
+              onClick={() => {
+                navigate("/score");
+              }}
+            >
+              ScoreBoard
+            </Button>
+          </>
+        ) : (
+          <>
+            <h1>Word Game</h1>
+            <h1>
+              Score: {Score} Hp: {hp}
+            </h1>
+            {statussame ? showSame() : <h1></h1>}
+            <FormControl>
+              <Grid container justifyContent="center" spacing={1}>
+                {wordArray.map((char, index) => (
+                  <Grid item key={index}>
+                    <TextField
+                      style={{ width: "50px" }}
+                      label={`${index + 1}`}
+                      variant="outlined"
+                      value={char}
+                      inputProps={{
+                        maxLength: 1,
+                        style: { textAlign: "center" },
+                      }} // Center-align text
+                      onChange={(e) =>
+                        handleCharacterChange(index, e.target.value)
+                      }
+                      onKeyDown={(e) => handleKeyDown(index, e)} // Handle backspace and enter
+                      inputRef={(el) => (textFieldRefs.current[index] = el)} // Assign refs to each input
+                    />
+                  </Grid>
+                ))}
+              </Grid>
+              <br />
+              <Grid container justifyContent="center">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleSubmit}
+                  disabled={wordArray.some((char) => char === "")} // Disable if any input is empty
+                >
+                  Submit
+                </Button>
+                <Button
+                  style={{ marginLeft: "10px" }}
+                  variant="contained"
+                  color="primary"
+                  onClick={() => {
+                    setWordlist([]);
+                    setScore(0);
+                    setRandomWordLength(randomWord());
+                    setWordArray(new Array(randomWordLength).fill(""));
+                  }}
+                >
+                  Reset
+                </Button>
+                <Button
+                  style={{ marginLeft: "10px" }}
+                  variant="contained"
+                  color="primary"
+                  onClick={() => {
+                    setRandomWordLength(randomWord());
+                    setScore(Score - randomWordLength);
+                    setWordArray(new Array(randomWordLength).fill(""));
+                  }}
+                >
+                  NewRandom
+                </Button>
+                <Button
+                  style={{ marginLeft: "10px" }}
+                  variant="contained"
+                  color="primary"
+                  onClick={() => {
+                    navigate("/");
+                  }}
+                >
+                  Back to Home
+                </Button>
+              </Grid>
+            </FormControl>
+          </>
+        )}
+        {starPositions.map((pos, i) => (
+          <div
+            key={i}
+            className="star"
+            style={{
+              top: `${pos.top}vh`,
+              left: `${pos.left}vw`,
+              animationDuration: `${pos.duration}s`,
             }}
-          >
-            Back to Home
-          </Button>
-          <Button
-            style={{ marginLeft: "10px" }}
-            variant="contained"
-            color="primary"
-            onClick={() => {
-              navigate("/score");
-            }}
-          >
-            ScoreBoard
-          </Button>
-        </>
-      ) : (
-        <>
-          <h1>Word Game</h1>
-          <h1>
-            Score: {Score} Hp: {hp}
-          </h1>
-          <h1>Random Word Length: {randomWordLength}</h1>
-          {statussame ? showSame() : <h1></h1>}
-
-          <FormControl>
-            <Grid container justifyContent="center" spacing={1}>
-              {wordArray.map((char, index) => (
-                <Grid item key={index}>
-                  <TextField
-                    style={{ width: "50px" }}
-                    label={`${index + 1}`}
-                    variant="outlined"
-                    value={char}
-                    inputProps={{
-                      maxLength: 1,
-                      style: { textAlign: "center" },
-                    }} // Center-align text
-                    onChange={(e) =>
-                      handleCharacterChange(index, e.target.value)
-                    }
-                    onKeyDown={(e) => handleKeyDown(index, e)} // Handle backspace and enter
-                    inputRef={(el) => (textFieldRefs.current[index] = el)} // Assign refs to each input
-                  />
-                </Grid>
-              ))}
-            </Grid>
-            <br />
-            <Grid container justifyContent="center">
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleSubmit}
-                disabled={wordArray.some((char) => char === "")} // Disable if any input is empty
-              >
-                Submit
-              </Button>
-              <Button
-                style={{ marginLeft: "10px" }}
-                variant="contained"
-                color="primary"
-                onClick={() => {
-                  setWordlist([]);
-                  setScore(0);
-                  setRandomWordLength(randomWord());
-                  setWordArray(new Array(randomWordLength).fill(""));
-                }}
-              >
-                Reset
-              </Button>
-              <Button
-                style={{ marginLeft: "10px" }}
-                variant="contained"
-                color="primary"
-                onClick={() => {
-                  setRandomWordLength(randomWord());
-                  setScore(Score - randomWordLength);
-                  setWordArray(new Array(randomWordLength).fill(""));
-                }}
-              >
-                NewRandom
-              </Button>
-              <Button
-                style={{ marginLeft: "10px" }}
-                variant="contained"
-                color="primary"
-                onClick={() => {
-                  navigate("/");
-                }}
-              >
-                Back to Home
-              </Button>
-            </Grid>
-          </FormControl>
-        </>
-      )}
-    </>
+          ></div>
+        ))}
+      </div>
+    </div>
   );
 };
 

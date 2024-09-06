@@ -8,6 +8,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import './BackgroundIndex.css'
+
+const starPositions = Array.from({ length: 100 }, () => ({
+  top: Math.random() * 100,
+  left: Math.random() * 100,
+  duration: Math.random() * 2 + 1,
+}));
+
 
 const ScorePage = () => {
   var datajson: { [key: string]: any } = { Round: 0 };
@@ -30,43 +38,56 @@ const ScorePage = () => {
     .sort(([, a], [, b]) => b.score - a.score); // Sort by score descending
 
   return (
-    <>
-      <h1>Word game</h1>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 200 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell align="right">Score</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {sortedData.map(([key, value]) => (
-              <TableRow
-                key={value.name}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {value.name}
-                </TableCell>
-                <TableCell align="right">{value.score}</TableCell>
+    <div className="space-background">
+      <div>
+        <h1>Word game</h1>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 200 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Name</TableCell>
+                <TableCell align="right">Score</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <br />
-      <Button
-        style={{ marginLeft: "10px" }}
-        variant="contained"
-        color="primary"
-        onClick={() => {
-          location.reload();
-        }}
-      >
-        Reload
-      </Button>
-    </>
+            </TableHead>
+            <TableBody>
+              {sortedData.map(([key, value]) => (
+                <TableRow
+                  key={value.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {value.name}
+                  </TableCell>
+                  <TableCell align="right">{value.score}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <br />
+        <Button
+          style={{ marginLeft: "10px" }}
+          variant="contained"
+          color="primary"
+          onClick={() => {
+            location.reload();
+          }}
+        >
+          Reload
+        </Button>
+        {starPositions.map((pos, i) => (
+            <div
+              key={i}
+              className="star"
+              style={{
+                top: `${pos.top}vh`,
+                left: `${pos.left}vw`,
+                animationDuration: `${pos.duration}s`,
+              }}
+            ></div>
+          ))}
+        </div>
+    </div>
   );
 };
 

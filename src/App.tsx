@@ -11,15 +11,15 @@ import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
-    <BrowserRouter>
-      <MainProvider>
-        {/* <ThemeProvider theme={theme}> */}
-        <MainPage />
-        {/* <ToastContainer /> */}
-        {/* </ThemeProvider> */}
-      </MainProvider>
-    </BrowserRouter>
-  );
+      <BrowserRouter>
+        <MainProvider>
+          {/* <ThemeProvider theme={theme}> */}
+          <MainPage />
+          {/* <ToastContainer /> */}
+          {/* </ThemeProvider> */}
+        </MainProvider>
+      </BrowserRouter>
+    );
 }
 
 export default App;
