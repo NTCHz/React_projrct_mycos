@@ -154,12 +154,12 @@ const Gamelogic = () => {
                   <Grid item key={index}>
                     <TextField 
                       autoFocus={index === 0} // Focus on the first input
-                      style={{ width: "50px", backgroundColor: "rgba(255, 255, 255, 0.1)", borderRadius: "5px" }}
+                      style={{ width: "50px", backgroundColor: "rgba(255, 255, 255, 0.1)", borderRadius: "5px", marginBottom: "20px" }}
                       variant="outlined"
                       value={char}
                       inputProps={{
                         maxLength: 1,
-                        style: { textAlign: "center", color: "white" },
+                        style: { textAlign: "center", color: "white"},
                       }} // Center-align text
                       onChange={(e) =>
                         handleCharacterChange(index, e.target.value)

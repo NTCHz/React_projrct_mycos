@@ -87,7 +87,7 @@ const ScorePage = () => {
         <h1>WordGame</h1>
         <Paper style={{ height: 400, width: 400}}>
       <TableVirtuoso
-        style={{ height: '100%', width: '100%'}}
+        style={{ height: '100%', width: '100%', marginBottom: '20px' }}
         data={sortedData}
         components={VirtuosoTableComponents}
         fixedHeaderContent={fixedHeaderContent}

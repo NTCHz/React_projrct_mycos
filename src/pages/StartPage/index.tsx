@@ -27,7 +27,7 @@ const StartPage = () => {
           <TextField
             label="Enter your name"
             variant="outlined"
-            style={{ width: '300px' }}
+            style={{ width: '300px', marginBottom: '20px' }}
             onChange={(e) => setUser(e.target.value)}
             InputLabelProps={{
               style: { color: 'white', fontFamily: 'Pixelify Sans', fontSize: '16px' }, // Change the font here
@@ -37,7 +37,6 @@ const StartPage = () => {
             }}
           />
         </FormControl>
-        <br />
         <br />
         <button className="start-button" disabled={user === null} onClick={() => 
         {navigate("/game");}}>
