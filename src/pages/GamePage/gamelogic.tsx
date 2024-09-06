@@ -6,7 +6,7 @@ import { useMain } from "../../contexts/MainContext";
 import { ref, set } from "firebase/database";
 import { database } from "./core/firebase";
 import data from "./word.json";
-import './BackgroundIndex.css'
+import '../BackgroundIndex.css'
 
 const starPositions = Array.from({ length: 100 }, () => ({
   top: Math.random() * 100,
@@ -25,6 +25,7 @@ const Gamelogic = () => {
   const navigate = useNavigate();
   const { user } = useMain();
 
+  // console.log(user);
   const randomWord = () => {
     return data[Math.floor(Math.random() * data.length)].length;
   };
@@ -143,7 +144,7 @@ const Gamelogic = () => {
           </>
         ) : (
           <>
-            <h1>Word Game</h1>
+            <h1>WordGame</h1>
             <h1>
               Score: {Score} Hp: {hp}
             </h1>
@@ -153,13 +154,12 @@ const Gamelogic = () => {
                 {wordArray.map((char, index) => (
                   <Grid item key={index}>
                     <TextField
-                      style={{ width: "50px" }}
-                      label={`${index + 1}`}
+                      style={{ width: "50px", backgroundColor: "rgba(255, 255, 255, 0.1)", borderRadius: "5px" }}
                       variant="outlined"
                       value={char}
                       inputProps={{
                         maxLength: 1,
-                        style: { textAlign: "center" },
+                        style: { textAlign: "center", color: "white" },
                       }} // Center-align text
                       onChange={(e) =>
                         handleCharacterChange(index, e.target.value)
@@ -176,11 +176,11 @@ const Gamelogic = () => {
                   variant="contained"
                   color="primary"
                   onClick={handleSubmit}
-                  disabled={wordArray.some((char) => char === "")} // Disable if any input is empty
+                  // disabled={wordArray.some((char) => char === "")} // Disable if any input is empty
                 >
                   Submit
                 </Button>
-                <Button
+                {/* <Button
                   style={{ marginLeft: "10px" }}
                   variant="contained"
                   color="primary"
@@ -204,7 +204,7 @@ const Gamelogic = () => {
                   }}
                 >
                   NewRandom
-                </Button>
+                </Button> */}
 
                 <Button
                   style={{ marginLeft: "10px" }}

@@ -8,7 +8,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import './BackgroundIndex.css'
+import '../BackgroundIndex.css'
 
 const starPositions = Array.from({ length: 100 }, () => ({
   top: Math.random() * 100,
@@ -39,9 +39,10 @@ const ScorePage = () => {
 
   return (
     <div className="space-background">
+
       <div>
-        <h1>Word game</h1>
-        <TableContainer component={Paper}>
+        <h1>WordGame</h1>
+        <TableContainer component={Paper} style={{ borderRadius: '15px', overflow: 'hidden', color: 'white'}}>
           <Table sx={{ minWidth: 200 }} aria-label="simple table">
             <TableHead>
               <TableRow>

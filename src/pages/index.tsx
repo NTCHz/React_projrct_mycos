@@ -7,7 +7,7 @@ import ScorePage from "./ScorePage";
 const MainPage = () => {
   return (
     <div>
-      {/* Top Navigation Bar */}
+      {/* Top Navigation Bar
       <Box
         sx={{
           typography: "body1",
@@ -25,6 +25,7 @@ const MainPage = () => {
             textDecoration: isActive ? "underline" : "none",
             color: isActive ? "primary.main" : "text.secondary",
             padding: "10px",
+            fontSize: "20px",
           };
         }}
       >
@@ -37,12 +38,13 @@ const MainPage = () => {
             fontWeight: isActive ? "bold" : "",
             textDecoration: isActive ? "underline" : "none",
             color: isActive ? "primary.main" : "text.secondary",
+            fontSize: "20px",
           };
         }}
       >
         Score Board
-      </NavLink>
-
+      </NavLink> */}
+        
       <Routes>
         <Route path="/" element={<StartPage />} />
         <Route path="/game" element={<GamePage />} />

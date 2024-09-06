@@ -1,26 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
 
 #root {
-  width: 1280px;
-  height: 720px;
-  margin: 0 auto;
-  padding: 2rem;
+  height: 100vh;     
+  width: 100vw;
+  /* margin: 0 auto; */
+  /* padding: 2rem; */
   text-align: center;
+  place-items: center;
+  display: inline;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 .App {
   text-align: center;
   margin-top: 0px;
-
 }
 
-.MuiInputLabel-root {
+/* .MuiInputLabel-root {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
   width: 100%;
-}
+} */
 
 .start-game-page {
   font-family: 'Pixelify Sans', sans-serif;
@@ -54,3 +59,37 @@
 .score-button:hover {
   background-color: #0056b3;
 }
+
+/* .MuiFormControl-root {
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+
+} */
+
+.MuiOutlinedInput-root {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.MuiInputLabel-root {
+  color: white !important;
+  position: absolute;
+  text-align: center;
+  transform: translateX(-50%);
+  left: 50%;
+  /* max-width: 300px; */
+  /* width: 500px; */
+  
+}
+
+.MuiOutlinedInput-notchedOutline {
+  border-color: white !important;
+}
+
+/* .no-select {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+} */

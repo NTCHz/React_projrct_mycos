@@ -1,7 +1,8 @@
 import { Button, FormControl, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useMain } from "../../contexts/MainContext";
-import './BackgroundIndex.css'
+import '../BackgroundIndex.css'
+import { useEffect, useState} from "react";
 
 const starPositions = Array.from({ length: 100 }, () => ({
   top: Math.random() * 100,
@@ -10,9 +11,14 @@ const starPositions = Array.from({ length: 100 }, () => ({
 }));
 
 const StartPage = () => {
-  const { setUser } = useMain();
+  const { user,setUser } = useMain();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    setUser(null);
+  }, [setUser]);
+
+  // console.log(user);
   return (
     <div className="space-background">
       <div className="start-game-page">
@@ -21,17 +27,25 @@ const StartPage = () => {
           <TextField
             label="Enter your name"
             variant="outlined"
+            style={{ width: '300px' }}
             onChange={(e) => setUser(e.target.value)}
             InputLabelProps={{
-              style: { color: 'white' },
+              style: { color: 'white', fontFamily: 'Pixelify Sans', fontSize: '16px' }, // Change the font here
+            }}
+            InputProps={{
+              style: { color: 'white', fontFamily: 'Pixelify Sans', fontSize: '16px' }, // Change the input font here
             }}
           />
         </FormControl>
         <br />
         <br />
-        <button className="start-button" onClick={() => 
+        <button className="start-button" disabled={user === null} onClick={() => 
         {navigate("/game");}}>
           Start
+        </button>
+        <button className="score-button" style={{marginLeft: '10px'}} onClick={() => 
+        {navigate("/score");}}>
+          Scoreboard
         </button>
         {starPositions.map((pos, i) => (
           <div

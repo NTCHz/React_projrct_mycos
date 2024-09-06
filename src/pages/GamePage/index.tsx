@@ -4,11 +4,7 @@ import './index.css'
 import Gamelogic from "./gamelogic";
 const GamePage = () => {
   return (
-    <div className="game-container">
-      <div className="gamelogic">
-        <Gamelogic />
-      </div>
-    </div>
+    <Gamelogic />
   );
 };
 
