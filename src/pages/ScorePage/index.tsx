@@ -62,6 +62,7 @@ const ScorePage = () => {
   function fixedHeaderContent() {
     return (
       <TableRow>
+        <TableCell align="center" sx={{ backgroundColor: 'background.paper', fontSize: "23px", fontFamily: "'Pixelify Sans', sans-serif;" }}>No.</TableCell>
         <TableCell align="center" sx={{ backgroundColor: 'background.paper', fontSize: "23px", fontFamily: "'Pixelify Sans', sans-serif;"}}>Name</TableCell>
         <TableCell align="center" sx={{ backgroundColor: 'background.paper', fontSize: "23px", fontFamily: "'Pixelify Sans', sans-serif;"}}>Score</TableCell>
       </TableRow>
@@ -72,6 +73,7 @@ const ScorePage = () => {
     const [key, value] = sortedData[index];
     return (
       <>
+        <TableCell align="center" sx={{fontSize: "18px",fontFamily: "'Pixelify Sans', sans-serif;"}}>{index + 1}</TableCell>
         <TableCell component="th" scope="row" align="center" sx={{fontSize: "18px",fontFamily: "'Pixelify Sans', sans-serif;"}}>
           {value.name}
         </TableCell>
@@ -85,9 +87,9 @@ const ScorePage = () => {
 
       <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
         <h1>WordGame</h1>
-        <Paper style={{ height: 400, width: 400}}>
+        <Paper style={{ height: 400, width: 400, marginBottom: '20px'}}>
       <TableVirtuoso
-        style={{ height: '100%', width: '100%', marginBottom: '20px' }}
+        style={{ height: '100%', width: '100%' }}
         data={sortedData}
         components={VirtuosoTableComponents}
         fixedHeaderContent={fixedHeaderContent}

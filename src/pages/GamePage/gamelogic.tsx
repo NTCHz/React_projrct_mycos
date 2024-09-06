@@ -3,7 +3,7 @@ import { Button, FormControl, Grid, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useMain } from "../../contexts/MainContext";
 // import { firebase } from "@react-native-firebase/database";
-import { ref, set } from "firebase/database";
+import { ref, set, get } from "firebase/database";
 import { database } from "./core/firebase";
 import data from "./word.json";
 import '../BackgroundIndex.css'
@@ -44,14 +44,14 @@ const Gamelogic = () => {
       setScore(prevScore => Math.max(prevScore + randomWordLength, 0));
     } else {
       setHp(prevHp => prevHp - 20);
-      setScore(prevScore => Math.max(prevScore - randomWordLength, 0));
+      // setScore(prevScore => Math.max(prevScore - randomWordLength, 0));
     }
   };
   
 
   const showSame = () => {
     setHp(hp - 10);
-    return <h1>SameWord</h1>;
+    setStatussame(false);
   };
 
   const handleCharacterChange = (index: number, value: string) => {
@@ -115,10 +115,26 @@ const Gamelogic = () => {
 
   console.log(wordlist);
   const saveScore = () => {
-    set(ref(database, `users/${user}`), {
-      name: user,
-      score: Score,
-    });
+    const userScoreRef = ref(database, `users/${user}/score`);
+  
+    get(userScoreRef)
+      .then((snapshot) => {
+        const data = snapshot.val();
+  
+        if (data === null) {
+          // User does not exist, create a new record with the score
+          set(ref(database, `users/${user}`), {
+            name: user,
+            score: Score,
+          });
+        } else if (data < Score) {
+          // User exists, but the new score is higher
+          set(ref(database, `users/${user}/score`), Score);
+        }
+      })
+      .catch((error) => {
+        console.error("Error saving score:", error);
+      });
   };
 
   return (
@@ -153,7 +169,7 @@ const Gamelogic = () => {
                 {wordArray.map((char, index) => (
                   <Grid item key={index}>
                     <TextField 
-                      autoFocus={index === 0} // Focus on the first input
+                      autoFocus // Focus on the first input
                       style={{ width: "50px", backgroundColor: "rgba(255, 255, 255, 0.1)", borderRadius: "5px", marginBottom: "20px" }}
                       variant="outlined"
                       value={char}
