@@ -107,6 +107,13 @@ const Gamelogic = () => {
     textFieldRefs.current = new Array(randomWordLength).fill(null);
   }, [randomWordLength]);
 
+  useEffect(() => {
+    if (textFieldRefs.current.length > 0) {
+      textFieldRefs.current[0]?.focus();
+    }
+  }, [wordArray.length]);
+
+  console.log(wordlist);
   const saveScore = () => {
     set(ref(database, `users/${user}`), {
       name: user,
@@ -122,25 +129,17 @@ const Gamelogic = () => {
             <h1>Game Over</h1>
             <h1>Score : {Score}</h1>
             {saveScore()}
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={() => {
-                navigate("/");
-              }}
-            >
-              Back to Home
-            </Button>
-            <Button
-              style={{ marginLeft: "10px" }}
-              variant="contained"
-              color="primary"
-              onClick={() => {
-                navigate("/score");
-              }}
-            >
-              ScoreBoard
-            </Button>
+            <div>
+            <button className="start-button" onClick={() => 
+        {navigate("/");}}>
+          Home
+        </button>
+            <button className="score-button" style={{marginLeft: '10px'}} onClick={() => 
+        {navigate("/score");}}>
+          Scoreboard
+        </button>
+        
+        </div>
           </>
         ) : (
           <>
@@ -153,7 +152,8 @@ const Gamelogic = () => {
               <Grid container justifyContent="center" spacing={1}>
                 {wordArray.map((char, index) => (
                   <Grid item key={index}>
-                    <TextField
+                    <TextField 
+                      autoFocus={index === 0} // Focus on the first input
                       style={{ width: "50px", backgroundColor: "rgba(255, 255, 255, 0.1)", borderRadius: "5px" }}
                       variant="outlined"
                       value={char}
@@ -172,14 +172,18 @@ const Gamelogic = () => {
               </Grid>
               <br />
               <Grid container justifyContent="center">
-                <Button
+              <button className="score-button" style={{marginLeft: '10px'}} onClick={() => 
+         {handleSubmit();}}>
+          Submit
+        </button>
+                {/* <Button
                   variant="contained"
                   color="primary"
                   onClick={handleSubmit}
                   // disabled={wordArray.some((char) => char === "")} // Disable if any input is empty
                 >
                   Submit
-                </Button>
+                </Button> */}
                 {/* <Button
                   style={{ marginLeft: "10px" }}
                   variant="contained"
@@ -206,7 +210,7 @@ const Gamelogic = () => {
                   NewRandom
                 </Button> */}
 
-                <Button
+                {/* <Button
                   style={{ marginLeft: "10px" }}
                   variant="contained"
                   color="primary"
@@ -215,7 +219,7 @@ const Gamelogic = () => {
                   }}
                 >
                   Back to Home
-                </Button>
+                </Button> */}
               </Grid>
             </FormControl>
           </>

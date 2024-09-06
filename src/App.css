@@ -35,7 +35,7 @@
 .start-button {
   padding-top: -20px;
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #632ae6;
   color: white;
   border: none;
   cursor: pointer;
@@ -43,13 +43,13 @@
 }
 
 .start-button:hover {
-  background-color: #0056b3;
+  background-color: #8054e6;
 }
 
 .score-button {
   padding-top: 20px;
   padding: 10px 20px;
-  background-color: #007bff;
+  background-color: #632ae6;
   color: white;
   border: none;
   cursor: pointer;
@@ -57,7 +57,7 @@
 }
 
 .score-button:hover {
-  background-color: #0056b3;
+  background-color: #8054e6;
 }
 
 /* .MuiFormControl-root {
