@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { Button, FormControl, Grid, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useMain } from "../../contexts/MainContext";
-import { firebase } from "./core/firebase";
+// import { firebase } from "@react-native-firebase/database";
+import { ref, set } from "firebase/database";
+import { database } from "./core/firebase";
 
 import data from "./word.json";
 
@@ -96,12 +98,20 @@ const Gamelogic = () => {
     textFieldRefs.current = new Array(randomWordLength).fill(null);
   }, [randomWordLength]);
 
+  const saveScore = () => {
+    set(ref(database, `users/${user}`), {
+      name: user,
+      score: Score,
+    });
+  };
+
   return (
     <>
       {hp <= 0 ? (
         <>
           <h1>Game Over</h1>
           <h1>Score : {Score}</h1>
+          {saveScore()}
           <Button
             variant="contained"
             color="primary"

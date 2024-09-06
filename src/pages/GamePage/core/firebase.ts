@@ -1,8 +1,5 @@
-// firebase.js
-
-import firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, set } from "firebase/database";
 
 // Your Firebase configuration
 const firebaseConfig = {
@@ -13,9 +10,12 @@ const firebaseConfig = {
   messagingSenderId: "387583863959",
   appId: "1:387583863959:web:b13863a8676e83e6cd4dd2",
   measurementId: "G-8QTYPFLJ8R",
+  databaseURL:
+    "https://wordgame-c6ff2-default-rtdb.asia-southeast1.firebasedatabase.app",
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
 
-export { firebase };
+export { database, ref, set };
