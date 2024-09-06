@@ -1,25 +1,23 @@
-import "./App.css";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import StartGamePage from './compontents/StartGamePage';
+import GamePage from './compontents/GamePage';
+import ScoreBoardPage from './compontents/ScoreBoardPage';
+import './App.css'
 
-import MainPage from "./pages";
-// import { ThemeProvider } from "@mui/material/styles";/
-import { MainProvider } from "./contexts/MainContext";
-// import theme from "./theme";
-import { BrowserRouter } from "react-router-dom";
-// import { ToastContainer } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-// import React from "react";
 
-function App() {
+const App = () => {
+  
   return (
-    <BrowserRouter>
-      <MainProvider>
-        {/* <ThemeProvider theme={theme}> */}
-        <MainPage />
-        {/* <ToastContainer /> */}
-        {/* </ThemeProvider> */}
-      </MainProvider>
-    </BrowserRouter>
+    <div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<StartGamePage />} />
+          <Route path="/game" element={<GamePage />} />
+          <Route path="/scoreboard" element={<ScoreBoardPage />} />
+        </Routes>
+      </Router>
+    </div>
   );
-}
+};
 
 export default App;
