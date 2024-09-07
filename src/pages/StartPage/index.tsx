@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useMain } from "../../contexts/MainContext";
 import '../BackgroundIndex.css'
 import { useEffect, useState} from "react";
+import MusicPlayer from './../../components/MusicPlayer';
 
 const starPositions = Array.from({ length: 100 }, () => ({
   top: Math.random() * 100,
@@ -46,6 +47,7 @@ const StartPage = () => {
         {navigate("/score");}}>
           Scoreboard
         </button>
+        {/* <MusicPlayer /> */}
         {starPositions.map((pos, i) => (
           <div
             key={i}

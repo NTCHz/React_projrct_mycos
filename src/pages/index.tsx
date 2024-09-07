@@ -7,44 +7,6 @@ import ScorePage from "./ScorePage";
 const MainPage = () => {
   return (
     <div>
-      {/* Top Navigation Bar
-      <Box
-        sx={{
-          typography: "body1",
-          "& > :not(style) ~ :not(style)": {
-            ml: 2,
-          },
-        }}
-        onClick={(e) => e.preventDefault()}
-      ></Box>
-      <NavLink
-        to={"/"}
-        style={({ isActive }) => {
-          return {
-            fontWeight: isActive ? "bold" : "",
-            textDecoration: isActive ? "underline" : "none",
-            color: isActive ? "primary.main" : "text.secondary",
-            padding: "10px",
-            fontSize: "20px",
-          };
-        }}
-      >
-        Home
-      </NavLink>
-      <NavLink
-        to={"/score"}
-        style={({ isActive }) => {
-          return {
-            fontWeight: isActive ? "bold" : "",
-            textDecoration: isActive ? "underline" : "none",
-            color: isActive ? "primary.main" : "text.secondary",
-            fontSize: "20px",
-          };
-        }}
-      >
-        Score Board
-      </NavLink> */}
-        
       <Routes>
         <Route path="/" element={<StartPage />} />
         <Route path="/game" element={<GamePage />} />

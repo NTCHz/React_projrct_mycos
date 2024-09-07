@@ -7,6 +7,7 @@ import { ref, set, get } from "firebase/database";
 import { database } from "./core/firebase";
 import data from "./word.json";
 import '../BackgroundIndex.css'
+import MusicPlayer from "../../components/MusicPlayer";
 
 const starPositions = Array.from({ length: 100 }, () => ({
   top: Math.random() * 100,
@@ -240,6 +241,7 @@ const Gamelogic = () => {
             </FormControl>
           </>
         )}
+        {/* <MusicPlayer /> */}
         {starPositions.map((pos, i) => (
           <div
             key={i}

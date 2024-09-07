@@ -60,13 +60,6 @@
   background-color: #8054e6;
 }
 
-/* .MuiFormControl-root {
-  width: 100%;
-  max-width: 300px;
-  text-align: center;
-
-} */
-
 .MuiOutlinedInput-root {
   color: white;
   background-color: rgba(255, 255, 255, 0.1);
@@ -87,9 +80,28 @@
   border-color: white !important;
 }
 
-/* .no-select {
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-} */
+.music-player-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-content: flex-end;
+  left: 10px;
+  bottom: 10px;
+
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+}
+
+.volume-icon {
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+}
+
+.volume-icon:hover {
+  transform: scale(1.1); /* Slight zoom on hover */
+  transition: transform 0.2s ease;
+}

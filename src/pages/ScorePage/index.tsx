@@ -12,6 +12,7 @@ import '../BackgroundIndex.css'
 import { TableVirtuoso, TableComponents } from 'react-virtuoso';
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import MusicPlayer from "../../components/MusicPlayer";
 
 
 const starPositions = Array.from({ length: 100 }, () => ({
@@ -88,7 +89,6 @@ const ScorePage = () => {
   
   return (
     <div className="space-background">
-
       <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
         <h1>WordGame</h1>
         <Paper style={{ height: 400, width: 400, marginBottom: '20px'}}>
@@ -134,6 +134,7 @@ const ScorePage = () => {
           Home
         </button>
         </div>
+        {/* <MusicPlayer /> */}
         {starPositions.map((pos, i) => (
             <div
               key={i}
