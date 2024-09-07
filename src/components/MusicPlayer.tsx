@@ -4,13 +4,14 @@ import lowVolumeIcon from './../assets/low-volume.png'; // Low volume icon
 import highVolumeIcon from './../assets/high-volume.png'; // High volume icon
 
 const MusicPlayer: React.FC = () => {
-  const [audio] = useState(new Audio('./../assets/music.mp3'));
+  const [audio] = useState(new Audio('/music.mp3'));
   const [volume, setVolume] = useState(1); // Initial volume level
 
   useEffect(() => {
     audio.volume = volume;
+    audio.loop = true;
     audio.play(); // Automatically play when the component mounts
-  }, [volume, audio]);
+  }, [audio]);
 
   const toggleVolume = () => {
     // Cycle between mute (0), low (0.5), and high (1)
