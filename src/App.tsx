@@ -9,10 +9,11 @@ import MusicPlayer from "./components/MusicPlayer";
 // import { ToastContainer } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 // import React from "react";
+import "./pages/BackgroundIndex.css";
 
 const starPositions = Array.from({ length: 100 }, () => ({
-  top: Math.random() * 100,
-  left: Math.random() * 100,
+  top: Math.random() * 99,
+  left: Math.random() * 99,
   duration: Math.random() * 2 + 1,
 }));
 

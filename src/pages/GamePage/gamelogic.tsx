@@ -6,7 +6,7 @@ import { useMain } from "../../contexts/MainContext";
 import { ref, set, get } from "firebase/database";
 import { database } from "./core/firebase";
 import data from "./word.json";
-import '../BackgroundIndex.css'
+import "../BackgroundIndex.css";
 import MusicPlayer from "../../components/MusicPlayer";
 
 const starPositions = Array.from({ length: 100 }, () => ({
@@ -25,6 +25,7 @@ const Gamelogic = () => {
   const [hp, setHp] = useState(100);
   const navigate = useNavigate();
   const { user } = useMain();
+  const [count, setCount] = useState(0);
 
   // console.log(user);
   const randomWord = () => {
@@ -42,16 +43,15 @@ const Gamelogic = () => {
       data.find((item: string) => item === currentWord) &&
       currentWord.length === randomWordLength
     ) {
-      setScore(prevScore => Math.max(prevScore + randomWordLength, 0));
+      setScore((prevScore) => Math.max(prevScore + randomWordLength, 0));
     } else {
-      setHp(prevHp => prevHp - 20);
+      setHp((prevHp) => prevHp - 20);
       // setScore(prevScore => Math.max(prevScore - randomWordLength, 0));
     }
   };
-  
 
   const showSame = () => {
-    setHp(hp - 10);
+    setHp(hp - 40);
     setStatussame(false);
   };
 
@@ -94,12 +94,11 @@ const Gamelogic = () => {
       setStatus(true);
       Callll();
       setStatussame(false);
-      setWordlist(prevList => [...prevList, currentWord]);
+      setWordlist((prevList) => [...prevList, currentWord]);
     }
     setWordArray(new Array(randomWordLength).fill(""));
     setRandomWordLength(randomWord());
   };
-  
 
   useEffect(() => {
     // Reset wordArray to match the randomWordLength when it changes
@@ -117,11 +116,11 @@ const Gamelogic = () => {
   console.log(wordlist);
   const saveScore = () => {
     const userScoreRef = ref(database, `users/${user}/score`);
-  
+
     get(userScoreRef)
       .then((snapshot) => {
         const data = snapshot.val();
-  
+
         if (data === null) {
           // User does not exist, create a new record with the score
           set(ref(database, `users/${user}`), {
@@ -147,16 +146,24 @@ const Gamelogic = () => {
             <h1>Score : {Score}</h1>
             {saveScore()}
             <div>
-            <button className="start-button" onClick={() => 
-        {navigate("/");}}>
-          Home
-        </button>
-            <button className="score-button" style={{marginLeft: '10px'}} onClick={() => 
-        {navigate("/score");}}>
-          Scoreboard
-        </button>
-        
-        </div>
+              <button
+                className="start-button"
+                onClick={() => {
+                  navigate("/");
+                }}
+              >
+                Home
+              </button>
+              <button
+                className="score-button"
+                style={{ marginLeft: "10px" }}
+                onClick={() => {
+                  navigate("/score");
+                }}
+              >
+                Scoreboard
+              </button>
+            </div>
           </>
         ) : (
           <>
@@ -169,14 +176,19 @@ const Gamelogic = () => {
               <Grid container justifyContent="center" spacing={1}>
                 {wordArray.map((char, index) => (
                   <Grid item key={index}>
-                    <TextField 
+                    <TextField
                       autoFocus // Focus on the first input
-                      style={{ width: "50px", backgroundColor: "rgba(255, 255, 255, 0.1)", borderRadius: "5px", marginBottom: "20px" }}
+                      style={{
+                        width: "50px",
+                        backgroundColor: "rgba(255, 255, 255, 0.1)",
+                        borderRadius: "5px",
+                        marginBottom: "20px",
+                      }}
                       variant="outlined"
                       value={char}
                       inputProps={{
                         maxLength: 1,
-                        style: { textAlign: "center", color: "white"},
+                        style: { textAlign: "center", color: "white" },
                       }} // Center-align text
                       onChange={(e) =>
                         handleCharacterChange(index, e.target.value)
@@ -189,10 +201,15 @@ const Gamelogic = () => {
               </Grid>
               <br />
               <Grid container justifyContent="center">
-              <button className="score-button" style={{marginLeft: '10px'}} onClick={() => 
-         {handleSubmit();}}>
-          Submit
-        </button>
+                <button
+                  className="score-button"
+                  style={{ marginLeft: "10px" }}
+                  onClick={() => {
+                    handleSubmit();
+                  }}
+                >
+                  Submit
+                </button>
                 {/* <Button
                   variant="contained"
                   color="primary"

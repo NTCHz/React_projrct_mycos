@@ -8,12 +8,11 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import '../BackgroundIndex.css'
-import { TableVirtuoso, TableComponents } from 'react-virtuoso';
+import "../BackgroundIndex.css";
+import { TableVirtuoso, TableComponents } from "react-virtuoso";
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MusicPlayer from "../../components/MusicPlayer";
-
 
 const starPositions = Array.from({ length: 100 }, () => ({
   top: Math.random() * 100,
@@ -21,11 +20,9 @@ const starPositions = Array.from({ length: 100 }, () => ({
   duration: Math.random() * 2 + 1,
 }));
 
-
 const ScorePage = () => {
   var datajson: { [key: string]: any } = { Round: 0 };
   const navigate = useNavigate();
-
 
   get(child(ref(database), "users/"))
     .then((snapshot) => {
@@ -49,7 +46,10 @@ const ScorePage = () => {
       <TableContainer component={Paper} {...props} ref={ref} />
     )),
     Table: (props) => (
-      <Table {...props} sx={{ borderCollapse: 'separate', tableLayout: 'fixed' }} />
+      <Table
+        {...props}
+        sx={{ borderCollapse: "separate", tableLayout: "fixed" }}
+      />
     ),
     TableHead: React.forwardRef<HTMLTableSectionElement>((props, ref) => (
       <TableHead {...props} ref={ref} />
@@ -63,9 +63,36 @@ const ScorePage = () => {
   function fixedHeaderContent() {
     return (
       <TableRow>
-        <TableCell align="center" sx={{ backgroundColor: 'background.paper', fontSize: "23px", fontFamily: "'Pixelify Sans', sans-serif;" }}>No.</TableCell>
-        <TableCell align="center" sx={{ backgroundColor: 'background.paper', fontSize: "23px", fontFamily: "'Pixelify Sans', sans-serif;"}}>Name</TableCell>
-        <TableCell align="center" sx={{ backgroundColor: 'background.paper', fontSize: "23px", fontFamily: "'Pixelify Sans', sans-serif;"}}>Score</TableCell>
+        <TableCell
+          align="center"
+          sx={{
+            backgroundColor: "background.paper",
+            fontSize: "23px",
+            fontFamily: "'Pixelify Sans', sans-serif;",
+          }}
+        >
+          No.
+        </TableCell>
+        <TableCell
+          align="center"
+          sx={{
+            backgroundColor: "background.paper",
+            fontSize: "23px",
+            fontFamily: "'Pixelify Sans', sans-serif;",
+          }}
+        >
+          Name
+        </TableCell>
+        <TableCell
+          align="center"
+          sx={{
+            backgroundColor: "background.paper",
+            fontSize: "23px",
+            fontFamily: "'Pixelify Sans', sans-serif;",
+          }}
+        >
+          Score
+        </TableCell>
       </TableRow>
     );
   }
@@ -74,32 +101,53 @@ const ScorePage = () => {
     const [key, value] = sortedData[index];
     return (
       <>
-        <TableCell align="center" sx={{fontSize: "18px",fontFamily: "'Pixelify Sans', sans-serif;"}}>{index + 1}</TableCell>
-        <TableCell component="th" scope="row" align="center" sx={{fontSize: "18px",fontFamily: "'Pixelify Sans', sans-serif;"}}>
+        <TableCell
+          align="center"
+          sx={{ fontSize: "18px", fontFamily: "'Pixelify Sans', sans-serif;" }}
+        >
+          {index + 1}
+        </TableCell>
+        <TableCell
+          component="th"
+          scope="row"
+          align="center"
+          sx={{ fontSize: "18px", fontFamily: "'Pixelify Sans', sans-serif;" }}
+        >
           {value.name}
         </TableCell>
-        <TableCell align="center" sx={{fontSize: "18px",fontFamily: "'Pixelify Sans', sans-serif;"}}>{value.score}</TableCell>
+        <TableCell
+          align="center"
+          sx={{ fontSize: "18px", fontFamily: "'Pixelify Sans', sans-serif;" }}
+        >
+          {value.score}
+        </TableCell>
       </>
     );
   }
 
   useEffect(() => {
-    ScorePage
-  }, []); 
-  
+    ScorePage;
+  }, []);
+
   return (
     <div className="space-background">
-      <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
         <h1>WordGame</h1>
-        <Paper style={{ height: 400, width: 400, marginBottom: '20px'}}>
-      <TableVirtuoso
-        style={{ height: '100%', width: '100%' }}
-        data={sortedData}
-        components={VirtuosoTableComponents}
-        fixedHeaderContent={fixedHeaderContent}
-        itemContent={rowContent}
-      />
-    </Paper>
+        <Paper style={{ height: 400, width: 400, marginBottom: "20px" }}>
+          <TableVirtuoso
+            style={{ height: "100%", width: "100%" }}
+            data={sortedData}
+            components={VirtuosoTableComponents}
+            fixedHeaderContent={fixedHeaderContent}
+            itemContent={rowContent}
+          />
+        </Paper>
         {/* <TableContainer component={Paper} style={{ borderRadius: '15px', overflow: 'hidden', color: 'white'}}>
           <Table sx={{ minWidth: 200 }} aria-label="simple table">
             <TableHead>
@@ -125,28 +173,37 @@ const ScorePage = () => {
         </TableContainer> */}
         <br />
         <div>
-        <button className="score-button" onClick={() => 
-        {location.reload();}}>
-          Reload
-        </button>
-        <button className="start-button" style={{marginLeft: '10px'}} onClick={() => 
-        {navigate("/");}}>
-          Home
-        </button>
+          <button
+            className="score-button"
+            onClick={() => {
+              location.reload();
+            }}
+          >
+            Reload
+          </button>
+          <button
+            className="start-button"
+            style={{ marginLeft: "10px" }}
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            Home
+          </button>
         </div>
         {/* <MusicPlayer /> */}
         {starPositions.map((pos, i) => (
-            <div
-              key={i}
-              className="star"
-              style={{
-                top: `${pos.top}vh`,
-                left: `${pos.left}vw`,
-                animationDuration: `${pos.duration}s`,
-              }}
-            ></div>
-          ))}
-        </div>
+          <div
+            key={i}
+            className="star"
+            style={{
+              top: `${pos.top}vh`,
+              left: `${pos.left}vw`,
+              animationDuration: `${pos.duration}s`,
+            }}
+          ></div>
+        ))}
+      </div>
     </div>
   );
 };
