@@ -1,9 +1,9 @@
 import { Button, FormControl, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useMain } from "../../contexts/MainContext";
-import '../BackgroundIndex.css'
-import { useEffect, useState} from "react";
-import MusicPlayer from './../../components/MusicPlayer';
+import "../BackgroundIndex.css";
+import { useEffect, useState } from "react";
+import MusicPlayer from "./../../components/MusicPlayer";
 
 const starPositions = Array.from({ length: 100 }, () => ({
   top: Math.random() * 100,
@@ -12,7 +12,7 @@ const starPositions = Array.from({ length: 100 }, () => ({
 }));
 
 const StartPage = () => {
-  const { user,setUser } = useMain();
+  const { user, setUser } = useMain();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,23 +28,46 @@ const StartPage = () => {
           <TextField
             label="Enter your name"
             variant="outlined"
-            style={{ width: '300px', marginBottom: '20px' }}
+            style={{ width: "300px", marginBottom: "20px" }}
             onChange={(e) => setUser(e.target.value)}
             InputLabelProps={{
-              style: { color: 'white', fontFamily: 'Pixelify Sans', fontSize: '16px' }, // Change the font here
+              style: {
+                color: "white",
+                fontFamily: "Pixelify Sans",
+                fontSize: "16px",
+              }, // Change the font here
             }}
             InputProps={{
-              style: { color: 'white', fontFamily: 'Pixelify Sans', fontSize: '16px' }, // Change the input font here
+              style: {
+                color: "white",
+                fontFamily: "Pixelify Sans",
+                fontSize: "16px",
+              }, // Change the input font here
+            }}
+            onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>) => {
+              if (e.key === "Enter") {
+                navigate("/game");
+              }
             }}
           />
         </FormControl>
         <br />
-        <button className="start-button" disabled={user === null} onClick={() => 
-        {navigate("/game");}}>
+        <button
+          className="start-button"
+          disabled={user === null}
+          onClick={() => {
+            navigate("/game");
+          }}
+        >
           Start
         </button>
-        <button className="score-button" style={{marginLeft: '10px'}} onClick={() => 
-        {navigate("/score");}}>
+        <button
+          className="score-button"
+          style={{ marginLeft: "10px" }}
+          onClick={() => {
+            navigate("/score");
+          }}
+        >
           Scoreboard
         </button>
         {/* <MusicPlayer /> */}

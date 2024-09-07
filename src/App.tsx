@@ -18,18 +18,22 @@ const starPositions = Array.from({ length: 100 }, () => ({
 
 function App() {
   return (
-      <BrowserRouter>
-        <MainProvider>
-          {/* <ThemeProvider theme={theme}> */}
-          <div className="space-background" style={{
+    <BrowserRouter>
+      <MainProvider>
+        {/* <ThemeProvider theme={theme}> */}
+        <div
+          className="space-background"
+          style={{
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-end",
-          }}>
-            <MainPage />
-            <MusicPlayer />
-          </div>
-          {starPositions.map((pos, i) => (
+            overflow: "hidden",
+          }}
+        >
+          <MainPage />
+          <MusicPlayer />
+        </div>
+        {starPositions.map((pos, i) => (
           <div
             key={i}
             className="star"
@@ -40,11 +44,11 @@ function App() {
             }}
           ></div>
         ))}
-          {/* <ToastContainer /> */}
-          {/* </ThemeProvider> */}
-        </MainProvider>
-      </BrowserRouter>
-    );
+        {/* <ToastContainer /> */}
+        {/* </ThemeProvider> */}
+      </MainProvider>
+    </BrowserRouter>
+  );
 }
 
 export default App;
